@@ -6,11 +6,12 @@ import { RegisterUserCommand } from './commands/register-user/register-user-comm
 
 @Controller('user')
 export class UserController {
-    constructor(private readonly commandBus: CommandBus,private readonly queryBus : QueryBus) { }
+    constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) { }
 
     @ApiProperty({})
     @Post("register")
-    async register(@Body() registerReqDto : RegisterReqDto) : Promise<void> {
-        return await this.commandBus.execute<RegisterUserCommand,void>(new RegisterUserCommand(registerReqDto)) 
+    async register(@Body() registerReqDto: RegisterReqDto): Promise<void> {
+        return await this.commandBus.execute<RegisterUserCommand, void>(new RegisterUserCommand(registerReqDto))
+
     }
 }
