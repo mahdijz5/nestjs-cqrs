@@ -7,5 +7,5 @@ export interface EntitySchemaFactory<
   TEntity extends AggregateRoot
 > {
   create(entity: TEntity): TSchema;
-  createFromSchema(entitySchema: TSchema): TEntity;
+  createFromSchema(entitySchema: TSchema| any): TEntity;
 }

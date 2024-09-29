@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
   FilterQuery,
-  LeanDocument,
+  FlattenMaps,
   Model,
-  _AllowStringsForIds,
+  Require_id,
 } from 'mongoose';
 
 import { EntitySchemaFactory } from './entity-schema.factory';
@@ -20,7 +20,7 @@ export abstract class EntityRepository<
       TSchema,
       TEntity
     >,
-  ) {}
+  ) { }
 
   protected async findOne(
     entityFilterQuery?: FilterQuery<TSchema>,
@@ -52,24 +52,5 @@ export abstract class EntityRepository<
     await new this.entityModel(this.entitySchemaFactory.create(entity)).save();
   }
 
-  protected async updateOne(
-    entityFilterQuery: FilterQuery<TSchema>,
-    entity: TEntity,
-  ): Promise<void> {
-    const updatedEntityDocument = await this.entityModel.updateOne(
-      entityFilterQuery,
-      (this.entitySchemaFactory.create(
-        entity,
-      ) as unknown) as _AllowStringsForIds<LeanDocument<TSchema>>,
-      {
-        new: true,
-        useFindAndModify: false,
-        lean: true,
-      },
-    );
-
-    if (!updatedEntityDocument) {
-      
-    }
-  }
+ 
 }
