@@ -12,6 +12,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JWT_EXPIRE } from 'src/common/constants/jwt.constant';
 import { UserQueryHandlers } from './queries';
 import { JWTStrategy } from 'src/common/strategies';
+import { UserEventHandlers } from './events';
+import {  userSagas } from './sagas/user.saga';
+import { SendEmailHandler } from './commands/send-email/send-email.handler';
 
 @Module({
   imports: [
@@ -37,8 +40,11 @@ import { JWTStrategy } from 'src/common/strategies';
     UserSchemaFactory,
     UserFactory,
     JWTStrategy,
+    userSagas,
     ...UserCommandHandlers,
-    ...UserQueryHandlers
+    ...UserQueryHandlers,
+    ...UserEventHandlers,
+     
   ]
 })
 export class UserModule { }
