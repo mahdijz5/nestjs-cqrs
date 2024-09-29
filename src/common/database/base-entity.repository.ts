@@ -14,7 +14,11 @@ export abstract class BaseEntityRepository<
     return this.findOne({ _id: new ObjectId(id) } as FilterQuery<TSchema>);
   }
 
-  
+  async findOneByCondition(filter: FilterQuery<TSchema>): Promise<any> {
+    return this.findOne({ ...filter });
+  }
+
+
   async findAll(): Promise<TEntity[]> {
     return this.find({});
   }

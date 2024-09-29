@@ -25,7 +25,7 @@ export abstract class EntityRepository<
   protected async findOne(
     entityFilterQuery?: FilterQuery<TSchema>,
   ): Promise<TEntity> {
-    const entityDocument = await this.entityModel.findOne(
+     const entityDocument = await this.entityModel.findOne(
       entityFilterQuery,
       {},
       { lean: true },

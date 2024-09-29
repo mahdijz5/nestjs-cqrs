@@ -1,8 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiProperty } from '@nestjs/swagger';
-import { RegisterReqDto } from './dto';
+import { ApiBearerAuth, ApiProperty } from '@nestjs/swagger';
+import { LoginReqDto, RegisterReqDto } from './dto';
 import { RegisterUserCommand } from './commands/register-user/register-user-command';
+import { LoginUserQuery } from './queries/login-user/login-user-query';
+import { JWTGuard } from 'src/common/guards';
 
 @Controller('user')
 export class UserController {
@@ -12,6 +14,19 @@ export class UserController {
     @Post("register")
     async register(@Body() registerReqDto: RegisterReqDto): Promise<void> {
         return await this.commandBus.execute<RegisterUserCommand, void>(new RegisterUserCommand(registerReqDto))
+    }
 
+    @ApiProperty({})
+    @Post("login")
+    async login(@Body() loginReqDto: LoginReqDto): Promise<void> {
+        return await this.queryBus.execute<LoginUserQuery, void>(new LoginUserQuery(loginReqDto))
+    }
+
+    @ApiBearerAuth()
+    @ApiProperty({})
+    @UseGuards(JWTGuard)
+    @Post("validate")
+    async validate( ): Promise<void> {
+        return 
     }
 }

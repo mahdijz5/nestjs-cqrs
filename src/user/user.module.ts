@@ -7,9 +7,22 @@ import { UserSchema } from './db/user.schema';
 import { UserRepository } from './db/user.repository';
 import { UserSchemaFactory } from './db/user.schema.factory';
 import { UserFactory } from './user.factory';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JWT_EXPIRE } from 'src/common/constants/jwt.constant';
+import { UserQueryHandlers } from './queries';
+import { JWTStrategy } from 'src/common/strategies';
 
 @Module({
   imports: [
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+          secret: configService.getOrThrow('JWT_SECRET'),
+          signOptions: { expiresIn: JWT_EXPIRE },
+      }),
+      inject: [ConfigService],
+  }),
     CqrsModule,
     MongooseModule.forFeature([
       {
@@ -23,7 +36,9 @@ import { UserFactory } from './user.factory';
     UserRepository,
     UserSchemaFactory,
     UserFactory,
-    ...UserCommandHandlers
+    JWTStrategy,
+    ...UserCommandHandlers,
+    ...UserQueryHandlers
   ]
 })
 export class UserModule { }
