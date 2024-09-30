@@ -3,6 +3,7 @@ import { DatabaseModule } from './common/database/database.module';
 import { LoggerModule } from './common/logger';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { TodoListModule } from './todo-list/todo-list.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ConfigModule } from '@nestjs/config';
     DatabaseModule,
     LoggerModule,
     UserModule,
+    TodoListModule,
   ],
   controllers: [],
   providers: [],
