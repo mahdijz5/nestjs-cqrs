@@ -8,13 +8,18 @@ import { Types } from "mongoose";
 export class UpdateTodoListHandler implements ICommandHandler<UpdateTodoListCommand> {
     constructor(
         private readonly todoListRepository: TodoListRepository,
-     ) { }
-    async execute({ id, updateTodoListReqDto }: UpdateTodoListCommand): Promise<void> {
-        const todoList = await this.todoListRepository.updateOne({ _id: new Types.ObjectId(id) }, { ...updateTodoListReqDto })
-        
-        // todoList.update()
+        private readonly eventPublisher: EventPublisher,
 
-        // todoList.commit()
+    ) { }
+    async execute({ id, updateTodoListReqDto }: UpdateTodoListCommand): Promise<void> {
+
+        const todoList =
+            this.eventPublisher.mergeObjectContext(
+                await this.todoListRepository.updateOne({ _id: new Types.ObjectId(id) }, { ...updateTodoListReqDto })
+            )
+        todoList.update()
+
+        todoList.commit()
         return
     }
 }

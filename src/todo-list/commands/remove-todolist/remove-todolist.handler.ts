@@ -11,7 +11,7 @@ export class RemoveTodoListHandler implements ICommandHandler<RemoveTodoListComm
         private readonly eventPublisher: EventPublisher
     ) { }
     async execute({ id }: RemoveTodoListCommand): Promise<void> {
-        const todoList = await this.todoListRepository.removeOne({ _id: new Types.ObjectId(id) })
+        const todoList = this.eventPublisher.mergeObjectContext(await this.todoListRepository.removeOne({ _id: new Types.ObjectId(id) }))
         todoList.delete()
 
         todoList.commit()

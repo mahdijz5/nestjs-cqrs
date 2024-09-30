@@ -16,15 +16,14 @@ export class CreateTodoItemHandler implements ICommandHandler<CreateTodoItemComm
         private readonly todoItemRepository: TodoItemRepository
     ) { }
     async execute({ createTodoItemReqDto }: CreateTodoItemCommand): Promise<void> {
-        const { description,   title, todoListId } = createTodoItemReqDto
+        const { description, title, todoListId } = createTodoItemReqDto
 
         const isExist = this.todoListRepository.findOneById(todoListId)
         if (!isExist) throw new NotFoundException(ERROR.NOT_FOUND)
 
         const items = await this.todoItemRepository.findAll({ todoListId: new Types.ObjectId(todoListId) })
-    console.log(items)
         const camper = this.eventPublisher.mergeObjectContext(
-            await this.todoItemFactory.create(title, description, items.length+1, todoListId)
+            await this.todoItemFactory.create(title, description, items.length + 1, todoListId)
         )
 
         camper.commit()

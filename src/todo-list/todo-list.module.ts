@@ -8,6 +8,7 @@ import { TodoItemFactory } from './entities/todoItem/todoitem.factory';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TodoItemController } from './todo-item.controller';
 import { todoListQueryHandlers } from './queries';
+import { todoListEventHandlers } from './events';
 @Module({
   imports : [
     CqrsModule,
@@ -32,7 +33,8 @@ import { todoListQueryHandlers } from './queries';
     TodoItemRepository,
     TodoListSchemaFactory,
     ...todoListCommandHandlers,
-    ...todoListQueryHandlers
+    ...todoListQueryHandlers,
+    ...todoListEventHandlers
   ]
 })
 export class TodoListModule {}

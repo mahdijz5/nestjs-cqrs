@@ -8,9 +8,11 @@ import { TodoItemRepository } from "src/todo-list/db";
 export class UpdateTodoItemHandler implements ICommandHandler<UpdateTodoItemCommand> {
     constructor(
         private readonly todoItemRepository: TodoItemRepository,
+        private readonly eventPublisher: EventPublisher,
      ) { }
     async execute({id,updateTodoItemReqDto}: UpdateTodoItemCommand): Promise<void> {
-        const todoItem = await this.todoItemRepository.updateOne({ _id: new Types.ObjectId(id) }, { ...updateTodoItemReqDto })
+        const todoItem =  this.eventPublisher.mergeObjectContext(await this.todoItemRepository.updateOne({ _id: new Types.ObjectId(id) }, { ...updateTodoItemReqDto }))
+        
         
         todoItem.update()
 

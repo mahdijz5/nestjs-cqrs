@@ -7,10 +7,9 @@ import { TodoListFactory } from "src/todo-list/entities/todoList/todolist.factor
 export class CreateTodoListHandler implements ICommandHandler<CreateTodoListCommand> {
     constructor(private readonly todoListFactory: TodoListFactory, private readonly eventPublisher: EventPublisher) { }
     async execute({ createTodoListReqDto }: CreateTodoListCommand): Promise<void> {
-        console.log(2)
-        const {title,userId} = createTodoListReqDto
+        const { title, userId } = createTodoListReqDto
         const camper = this.eventPublisher.mergeObjectContext(
-            await this.todoListFactory.create(title,userId)
+            await this.todoListFactory.create(title, userId)
         )
         camper.commit()
         return

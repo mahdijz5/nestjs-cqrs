@@ -8,18 +8,20 @@ import { UpdatePriorityCommand } from "./update-priority.command";
 export class UpdatePriorityTodoItemHandler implements ICommandHandler<UpdatePriorityCommand> {
     constructor(
         private readonly todoItemRepository: TodoItemRepository,
+        private readonly eventPublisher: EventPublisher,
+
     ) { }
     async execute({ id, updateTodoItemReqDto }: UpdatePriorityCommand): Promise<void> {
-        const {priority}  = updateTodoItemReqDto
+        const { priority } = updateTodoItemReqDto
         const item = await this.todoItemRepository.findOneById(id)
-        
-        const isExist = await this.todoItemRepository.findOneByCondition({todoListId : new Types.ObjectId(item.getTodolistId),priority})
-        if(isExist) {
-            await this.todoItemRepository.updateMany({ todoListId: new Types.ObjectId(item.getTodolistId), priority : {$gte  :priority }}, {$inc : {priority  : +1}})
+
+        const isExist = await this.todoItemRepository.findOneByCondition({ todoListId: new Types.ObjectId(item.getTodolistId), priority })
+        if (isExist) {
+            await this.todoItemRepository.updateMany({ todoListId: new Types.ObjectId(item.getTodolistId), priority: { $gte: priority } }, { $inc: { priority: +1 } })
         }
-
-        const todoItem = await this.todoItemRepository.updateOne({ _id: new Types.ObjectId(id) }, { ...updateTodoItemReqDto })
-
+        const todoItem = this.eventPublisher.mergeObjectContext(
+            await this.todoItemRepository.updateOne({ _id: new Types.ObjectId(id) }, { ...updateTodoItemReqDto })
+        )
         todoItem.update()
 
         todoItem.commit()

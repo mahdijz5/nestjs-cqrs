@@ -1,4 +1,6 @@
 import { AggregateRoot } from "@nestjs/cqrs";
+import { EventType } from "src/common/enums/event-type.enum";
+import { TodoListLogEvent } from "src/todo-list/events/todolist-logger/todolist.event";
  
 export class TodoList extends AggregateRoot {
     constructor(
@@ -23,11 +25,12 @@ export class TodoList extends AggregateRoot {
 
 
     delete() {
-        // this.apply()
+        this.apply(new TodoListLogEvent(EventType.DELETE,this))
+
     }
 
     update() {
-        // this.apply()
+         this.apply(new TodoListLogEvent(EventType.UPDATE,this))
     }
     
 }
