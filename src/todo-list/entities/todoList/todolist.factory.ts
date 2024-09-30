@@ -8,8 +8,9 @@ import { TodoListRepository } from "src/todo-list/db/todoList/todolist.repositor
 @Injectable()
 export class TodoListFactory implements EntityFactory<TodoList> {
     constructor(private readonly todoListRepository: TodoListRepository) { }
+    
     async create(title: string, userId: string): Promise<TodoList> {
-        const todoList = new TodoList(new Types.ObjectId().toHexString(), title, new Types.ObjectId(userId).toHexString())
+        const todoList = new TodoList(new Types.ObjectId().toString(), title, new Types.ObjectId(userId).toString())
         await this.todoListRepository.create(todoList)
 
         // TODO event

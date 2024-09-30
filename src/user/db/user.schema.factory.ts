@@ -15,6 +15,6 @@ export class UserSchemaFactory implements EntitySchemaFactory<UserSchema, User> 
     }
 
     createFromSchema(entitySchema: UserSchema): User {
-        return new User(entitySchema._id.toHexString(),entitySchema.username,entitySchema.password)
+        return new User(entitySchema._id.toString(),entitySchema.username,entitySchema.password)
     }
 }

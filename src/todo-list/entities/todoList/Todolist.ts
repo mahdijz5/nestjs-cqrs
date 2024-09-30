@@ -20,5 +20,14 @@ export class TodoList extends AggregateRoot {
     get getUserId() {
         return this.userId
     }
+
+
+    delete() {
+        // this.apply()
+    }
+
+    update() {
+        // this.apply()
+    }
     
 }

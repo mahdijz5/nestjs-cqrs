@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { ObjectId } from 'mongodb';
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, RootFilterQuery, SortOrder, UpdateQuery } from 'mongoose';
 import { EntityRepository } from './entity.repository';
 
 import { IdentifiableEntitySchema } from './identifiable-entity.schema';
@@ -19,7 +19,15 @@ export abstract class BaseEntityRepository<
   }
 
 
-  async findAll(): Promise<TEntity[]> {
-    return this.find({});
+  async findAll( entityFilterQuery?: FilterQuery<TSchema>, sort?: string | { [key: string]: SortOrder | { $meta: any; }; } | [string, SortOrder][] | undefined | null): Promise<TEntity[]> {
+     return this.find(entityFilterQuery,sort);
+  }
+
+  async updateOneByCondition(filter: RootFilterQuery<TSchema>, updateQuery: UpdateQuery<TSchema>): Promise<TEntity> {
+    return this.updateOne(filter,updateQuery);
+  }
+
+  async removeOne(filter: RootFilterQuery<TSchema>): Promise<TEntity> {
+    return this.remove({...filter});
   }
 }

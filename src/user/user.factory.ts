@@ -12,7 +12,7 @@ export class UserFactory implements EntityFactory<User> {
     async create(username: string, password: string): Promise<User> {
         const hashedPassword = await hashPassword(password)
         const user = new User(
-            new Types.ObjectId().toHexString(),
+            new Types.ObjectId().toString(),
             username,
             hashedPassword
         )

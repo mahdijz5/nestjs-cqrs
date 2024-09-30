@@ -9,7 +9,7 @@ import { TodoItemRepository } from "src/todo-list/db/todoItem/todoitem.repositor
 export class TodoItemFactory implements EntityFactory<TodoItem> {
     constructor(private readonly TodoItemRepository: TodoItemRepository) { }
     async create(title: string, description: string, priority: number, todoListItem: string): Promise<TodoItem> {
-        const todoItem = new TodoItem(new Types.ObjectId().toHexString(), new Types.ObjectId().toHexString(), title, description, priority)
+        const todoItem = new TodoItem(new Types.ObjectId().toString(), new Types.ObjectId(todoListItem).toString(), title, description, priority)
         await this.TodoItemRepository.create(todoItem)
 
         // TODO event

@@ -32,4 +32,14 @@ export class TodoItem extends AggregateRoot {
         return this.priority
     }
 
+    
+    delete() {
+        // this.apply()
+    }
+
+    update() {
+        // this.apply()
+    }
+    
+
 }

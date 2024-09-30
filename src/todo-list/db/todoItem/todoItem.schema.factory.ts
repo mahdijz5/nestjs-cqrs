@@ -17,6 +17,6 @@ export class TodoItemSchemaFactory implements EntitySchemaFactory<TodoItemSchema
     }
 
     createFromSchema(entitySchema: TodoItemSchema): TodoItem {
-        return new TodoItem(entitySchema._id.toHexString(), entitySchema.todoListId.toHexString(), entitySchema.title, entitySchema.description, entitySchema.priority)
+        return new TodoItem(entitySchema._id.toString(), entitySchema.todoListId.toString(), entitySchema.title, entitySchema.description, entitySchema.priority)
     }
 }
