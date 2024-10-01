@@ -1,4 +1,4 @@
-import { RegisterReqDto } from "user/dto";
+import { RegisterReqDto } from "../../../user/dto";
 
  
  

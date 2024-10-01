@@ -1,5 +1,5 @@
-import { EventType } from "src/common/enums/event-type.enum";
-import { TodoItem } from "src/todo-list/entities/todoItem/TodoItem";
+import { EventType } from "../../../common/enums/event-type.enum";
+import { TodoItem } from "../../../todo-list/entities/todoItem/TodoItem";
  
  
 export class TodoItemLogEvent {

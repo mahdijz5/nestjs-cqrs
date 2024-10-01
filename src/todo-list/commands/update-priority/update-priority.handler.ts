@@ -1,6 +1,6 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { Types } from "mongoose";
-import { TodoItemRepository } from "src/todo-list/db";
+import { TodoItemRepository } from "../../../todo-list/db";
 import { UpdatePriorityCommand } from "./update-priority.command";
 
 

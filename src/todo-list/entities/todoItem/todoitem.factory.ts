@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { EntityFactory } from "src/common/database/entity.factory";
+import { EntityFactory } from "../../../common/database/entity.factory";
 import { Types } from "mongoose";
 import { TodoItem } from "./TodoItem";
-import { TodoItemRepository } from "src/todo-list/db/todoItem/todoitem.repository";
-import { TodoItemLogEvent } from "src/todo-list/events/todoItem-logger/todoItem.event";
-import { EventType } from "src/common/enums/event-type.enum";
+import { TodoItemRepository } from "../../../todo-list/db/todoItem/todoitem.repository";
+import { TodoItemLogEvent } from "../../../todo-list/events/todoItem-logger/todoItem.event";
+import { EventType } from "../../../common/enums/event-type.enum";
 
 
 @Injectable()

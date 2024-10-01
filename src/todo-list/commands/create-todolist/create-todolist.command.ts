@@ -1,4 +1,4 @@
-import { CreateTodoListReqDto } from "src/todo-list/dto";
+import { CreateTodoListReqDto } from "../../../todo-list/dto";
  
  
 export class CreateTodoListCommand {

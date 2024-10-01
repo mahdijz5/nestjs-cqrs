@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { BaseEntityRepository } from "src/common/database/base-entity.repository";
+import { BaseEntityRepository } from "../../../common/database/base-entity.repository";
 import { TodoItem } from "../../entities/todoItem/TodoItem";
 import {  TodoItemSchema } from "./todoItem.schema";
 import { TodoItemSchemaFactory } from "./todoItem.schema.factory";

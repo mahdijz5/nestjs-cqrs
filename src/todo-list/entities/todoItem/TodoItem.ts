@@ -1,6 +1,6 @@
 import { AggregateRoot } from "@nestjs/cqrs";
-import { EventType } from "src/common/enums/event-type.enum";
-import { TodoItemLogEvent } from "src/todo-list/events/todoItem-logger/todoItem.event";
+import { EventType } from "../../../common/enums/event-type.enum";
+import { TodoItemLogEvent } from "../../../todo-list/events/todoItem-logger/todoItem.event";
 
 export class TodoItem extends AggregateRoot {
     constructor(

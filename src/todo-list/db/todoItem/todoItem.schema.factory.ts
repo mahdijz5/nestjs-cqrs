@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { EntitySchemaFactory } from "src/common/database/entity-schema.factory";
+import { EntitySchemaFactory } from "../../../common/database/entity-schema.factory";
 import { Types } from "mongoose";
 import { TodoItemSchema } from "./todoItem.schema";
-import { TodoItem } from "src/todo-list/entities/todoItem/TodoItem";
+import { TodoItem } from "../../../todo-list/entities/todoItem/TodoItem";
 
 @Injectable()
 export class TodoItemSchemaFactory implements EntitySchemaFactory<TodoItemSchema, TodoItem> {

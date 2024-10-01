@@ -8,8 +8,7 @@ import { STATUS_CODES } from 'http';
 export class AllExceptionFilter implements ExceptionFilter {
     catch(exception: any, host: ArgumentsHost) {
         const reply = host.switchToHttp().getResponse();
-         
-        let status = exception.status || HttpStatus.INTERNAL_SERVER_ERROR;
+         let status = exception.status || HttpStatus.INTERNAL_SERVER_ERROR;
         let response = exception.response || ERROR.INTERNAL_SERVER_ERROR;
 
         if (exception?.name == "CastError" && exception?.kind == "ObjectId") {

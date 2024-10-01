@@ -10,6 +10,7 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
         private readonly eventPublisher: EventPublisher
     ) { }
     async execute({ registerUserReq }: RegisterUserCommand): Promise<void> {
+        
         const { password, username } = registerUserReq
 
         const user = this.eventPublisher.mergeObjectContext(

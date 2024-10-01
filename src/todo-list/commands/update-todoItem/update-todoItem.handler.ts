@@ -1,7 +1,7 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { UpdateTodoItemCommand } from "./update-todoItem.command";
  import { Types } from "mongoose";
-import { TodoItemRepository } from "src/todo-list/db";
+import { TodoItemRepository } from "../../../todo-list/db";
 
 
 @CommandHandler(UpdateTodoItemCommand)

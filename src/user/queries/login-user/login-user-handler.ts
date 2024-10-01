@@ -2,8 +2,8 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 
 import { LoginUserQuery } from "./login-user-query";
 import { UserRepository } from "../../../user/db/user.repository";
-import { LoginReqDto } from "src/user/dto";
-import { LoginResDto } from "src/user/dto/login-res.dto";
+import { LoginReqDto } from "../../../user/dto";
+import { LoginResDto } from "../../../user/dto/login-res.dto";
 import { comparePassword } from "../../../user/utils/hash.utils";
 import { BadRequestException } from "@nestjs/common";
 import { ERROR } from "../../../common/enums";

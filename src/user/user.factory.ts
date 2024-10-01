@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { EntityFactory } from "src/common/database/entity.factory";
+import { EntityFactory } from "../common/database/entity.factory";
 import { Types } from "mongoose";
 import { User } from "./User";
 import { UserRepository } from "./db/user.repository";

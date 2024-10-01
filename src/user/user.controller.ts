@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBearerAuth, ApiProperty } from '@nestjs/swagger';
 import { LoginReqDto, RegisterReqDto } from './dto';
@@ -16,6 +16,7 @@ export class UserController {
         return await this.commandBus.execute<RegisterUserCommand, void>(new RegisterUserCommand(registerReqDto))
     }
 
+    @HttpCode(HttpStatus.OK)
     @ApiProperty({})
     @Post("login")
     async login(@Body() loginReqDto: LoginReqDto): Promise<void> {
@@ -24,6 +25,7 @@ export class UserController {
 
     @ApiBearerAuth()
     @ApiProperty({})
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JWTGuard)
     @Post("validate")
     async validate( ): Promise<void> {

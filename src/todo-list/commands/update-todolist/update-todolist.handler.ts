@@ -1,6 +1,6 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { UpdateTodoListCommand } from "./update-todolist.command";
-import { TodoListRepository, TodoListSchemaFactory } from "src/todo-list/db";
+import { TodoListRepository, TodoListSchemaFactory } from "../../../todo-list/db";
 import { Types } from "mongoose";
 
 

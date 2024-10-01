@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
-import { TodoItemRepository, TodoListRepository } from "src/todo-list/db";
+import { TodoItemRepository, TodoListRepository } from "../../../todo-list/db";
 import { Types } from "mongoose";
 import { FindAllTodoItemQuery } from "./findAll-todoItem.query";
-import { TodoItem } from "src/todo-list/entities/todoItem/TodoItem";
+import { TodoItem } from "../../../todo-list/entities/todoItem/TodoItem";
 
 @QueryHandler(FindAllTodoItemQuery)
 export class FindAllTodoitemHandler implements IQueryHandler<FindAllTodoItemQuery> {
