@@ -1,14 +1,14 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 
 import { LoginUserQuery } from "./login-user-query";
-import { UserRepository } from "src/user/db/user.repository";
+import { UserRepository } from "../../../user/db/user.repository";
 import { LoginReqDto } from "src/user/dto";
 import { LoginResDto } from "src/user/dto/login-res.dto";
-import { comparePassword } from "src/user/utils/hash.utils";
+import { comparePassword } from "../../../user/utils/hash.utils";
 import { BadRequestException } from "@nestjs/common";
-import { ERROR } from "src/common/enums";
+import { ERROR } from "../../../common/enums";
 import { JwtService } from "@nestjs/jwt";
-import { JwtDataInterface } from "src/common/interfaces/jwt-interface";
+import { JwtDataInterface } from "../../../common/interfaces/jwt-interface";
 
 @QueryHandler(LoginUserQuery)
 export class LoginUserHandler implements IQueryHandler<LoginUserQuery> {
@@ -18,6 +18,8 @@ export class LoginUserHandler implements IQueryHandler<LoginUserQuery> {
         const user = await this.userRepository.findOneByCondition({
             username: loginReqDto.username
         })
+        if (!user) throw new BadRequestException(ERROR.INVALID_CREDENTIALS)
+
         const isPasswordMatched = await comparePassword(loginReqDto.password, user.getPassword)
 
         if (!isPasswordMatched) throw new BadRequestException(ERROR.INVALID_CREDENTIALS)

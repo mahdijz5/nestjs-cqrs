@@ -1,18 +1,21 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { RegisterUserCommand } from "./register-user-command";
-import { UserFactory } from "src/user/user.factory";
+import { UserFactory } from "../../user.factory";
 
 
 @CommandHandler(RegisterUserCommand)
 export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand> {
-    constructor(private readonly userFactory: UserFactory, private readonly eventPublisher: EventPublisher) { }
+    constructor(
+        private readonly userFactory: UserFactory, 
+        private readonly eventPublisher: EventPublisher
+    ) { }
     async execute({ registerUserReq }: RegisterUserCommand): Promise<void> {
         const { password, username } = registerUserReq
 
-        const camper = this.eventPublisher.mergeObjectContext(
+        const user = this.eventPublisher.mergeObjectContext(
             await this.userFactory.create(username, password)
         )
-        camper.commit()
+        user.commit()
         return
     }
 }

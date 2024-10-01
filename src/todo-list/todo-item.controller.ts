@@ -1,13 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
- import { JWTData } from 'src/common/decorators';
-import { JwtDataInterface } from 'src/common/interfaces/jwt-interface';
-import { JWTGuard } from 'src/common/guards';
+import { JWTData } from '../common/decorators';
+import { JWTGuard } from '../common/guards';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateTodoListCommand } from './commands/create-todolist/create-todolist.command';
-import { UpdateTodoListReqDto } from './dto/update-todolist-req.dto';
-import { UpdateTodoListCommand } from './commands/update-todolist/update-todolist.command';
-import { RemoveTodoListCommand } from './commands/remove-todolist/remove-todolist.command';
 import { CreateTodoItemCommand } from './commands/create-todoItem/create-todoItem.command';
 import { UpdateTodoItemCommand } from './commands/update-todoItem/update-todoItem.command';
 import { RemoveTodoItemCommand } from './commands/remove-todoItem/remove-todoItem.command';
@@ -26,10 +21,10 @@ export class TodoItemController {
     async findAll(@Param("todoListId") todoListId: string) {
         return await this.queryBus.execute<FindAllTodoItemQuery, void>(new FindAllTodoItemQuery(todoListId))
     }
-    
+
     @Post()
-    async create(@Body() createTodoItemDto: CreateTodoItemReqDto ) {
-        await this.commandBus.execute<CreateTodoItemCommand, void>(new CreateTodoItemCommand({ ...createTodoItemDto}))
+    async create(@Body() createTodoItemDto: CreateTodoItemReqDto) {
+        await this.commandBus.execute<CreateTodoItemCommand, void>(new CreateTodoItemCommand({ ...createTodoItemDto }))
     }
 
     @Patch(":id")

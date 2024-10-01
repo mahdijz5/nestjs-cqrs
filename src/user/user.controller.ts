@@ -4,7 +4,7 @@ import { ApiBearerAuth, ApiProperty } from '@nestjs/swagger';
 import { LoginReqDto, RegisterReqDto } from './dto';
 import { RegisterUserCommand } from './commands/register-user/register-user-command';
 import { LoginUserQuery } from './queries/login-user/login-user-query';
-import { JWTGuard } from 'src/common/guards';
+import { JWTGuard } from '../common/guards';
 
 @Controller('user')
 export class UserController {

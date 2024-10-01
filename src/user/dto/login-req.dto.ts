@@ -1,4 +1,4 @@
-import { ApiCustomeProperty } from "src/common/decorators";
+import { ApiCustomeProperty } from "../../common/decorators";
 
 export class LoginReqDto {
     @ApiCustomeProperty({

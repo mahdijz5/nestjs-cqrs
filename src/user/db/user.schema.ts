@@ -1,6 +1,6 @@
 import { Prop, Schema } from "@nestjs/mongoose";
 import { SchemaTypes } from "mongoose";
-import { IdentifiableEntitySchema } from "src/common/database/identifiable-entity.schema";
+import { IdentifiableEntitySchema } from "../../common/database/identifiable-entity.schema";
 
 @Schema({ versionKey: false, collection: "users" })
 export class UserSchema extends IdentifiableEntitySchema {

@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateTodoListReqDto } from './dto';
-import { JWTData } from 'src/common/decorators';
-import { JwtDataInterface } from 'src/common/interfaces/jwt-interface';
-import { JWTGuard } from 'src/common/guards';
+import { JWTData } from '../common/decorators';
+import { JwtDataInterface } from '../common/interfaces/jwt-interface';
+import { JWTGuard } from '../common/guards';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateTodoListCommand } from './commands/create-todolist/create-todolist.command';
 import { UpdateTodoListReqDto } from './dto/update-todolist-req.dto';

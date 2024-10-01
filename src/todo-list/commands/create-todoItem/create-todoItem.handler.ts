@@ -1,9 +1,9 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { CreateTodoItemCommand } from "./create-todoItem.command";
-import { TodoItemRepository, TodoListRepository } from "src/todo-list/db";
+import { TodoItemRepository, TodoListRepository } from "../../../todo-list/db";
 import { NotFoundException } from "@nestjs/common";
-import { ERROR } from "src/common/enums";
-import { TodoItemFactory } from "src/todo-list/entities/todoItem/todoitem.factory";
+import { ERROR } from "../../../common/enums";
+import { TodoItemFactory } from "../../../todo-list/entities/todoItem/todoitem.factory";
 import { Types } from "mongoose";
 
 

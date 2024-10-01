@@ -1,6 +1,6 @@
 import { Prop, Schema } from "@nestjs/mongoose";
 import {  SchemaType, SchemaTypes } from "mongoose";
-import { IdentifiableEntitySchema } from "src/common/database/identifiable-entity.schema";
+import { IdentifiableEntitySchema } from "../../../common/database/identifiable-entity.schema";
 import { ObjectId } from 'mongodb';
 
 @Schema({ versionKey: false, collection: "todoLists" })

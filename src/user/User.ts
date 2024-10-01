@@ -12,7 +12,7 @@ export class User extends AggregateRoot {
     get getID() {
         return this._id
     }
-
+ 
     get getUsername() {
         return this.username
     }
